@@ -84,4 +84,4 @@ Pre-requisites:
 1. Download zip and extract files, or clone: `git clone git@github.com:steve-king/smh-client.git`
 2. Change to directory: `cd smh-client`
 3. Install node packages: `npm install`
-4. Start the server: `npm start`
+4. Start the server: `npm run build && npm start`

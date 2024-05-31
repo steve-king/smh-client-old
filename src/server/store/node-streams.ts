@@ -1,8 +1,8 @@
 import { credentials } from '@grpc/grpc-js'
-import api from '../spacemesh'
-import Stream from './Stream'
-import { log } from '../utils'
-import { Node } from '../../types'
+import { Node } from '@/types'
+import api from '@/server/spacemesh'
+import Stream from '@/server/store/Stream'
+import { log } from '@/server/utils'
 
 const creds = credentials.createInsecure()
 

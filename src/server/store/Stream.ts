@@ -1,5 +1,5 @@
 import { ChannelCredentials, ClientReadableStream } from '@grpc/grpc-js'
-import { log } from '../utils'
+import { log } from '@/server/utils'
 
 const reconnectIntervalSeconds = 60
 const reconnectInterval = reconnectIntervalSeconds * 1000

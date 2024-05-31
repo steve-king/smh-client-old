@@ -1,45 +1,26 @@
-var fs = require('fs')
-var path = require('path')
-var grpc = require('@grpc/grpc-js')
-var protoLoader = require('@grpc/proto-loader')
+import path from 'path'
+import { loadPackageDefinition } from '@grpc/grpc-js'
+import { loadSync } from '@grpc/proto-loader'
 
-const GOOGLE_PROTO_PATH = path.join(
-  process.cwd(),
-  'node_modules/google-proto-files'
-)
-const SPACEMESH_PROTO_PATH = path.join(
-  process.cwd(),
-  'src/server/spacemesh/api'
-)
+import { recursiveFileList } from '@/server/utils'
 
-// Recursively get all .proto file paths in given directory
-function getProtoFiles(dir: string): string[] {
-  let protoFiles: string[] = []
-  const files = fs.readdirSync(dir)
-  for (const file of files) {
-    const filePath = path.join(dir, file)
-    const stat = fs.statSync(filePath)
-    if (stat.isDirectory()) {
-      protoFiles = protoFiles.concat(getProtoFiles(filePath))
-    } else if (filePath.endsWith('.proto')) {
-      protoFiles.push(filePath)
-    }
-  }
-  return protoFiles
+const cwd = process.cwd()
+const protoDirs = {
+  google: path.join(cwd, 'node_modules/google-proto-files'),
+  spacemesh: path.join(cwd, 'src/server/spacemesh/api'),
 }
 
-// Load proto files
-const protoFiles = getProtoFiles(SPACEMESH_PROTO_PATH)
+const protoFiles = recursiveFileList(protoDirs.spacemesh, '.proto')
 
-const packageDefinition = protoLoader.loadSync(protoFiles, {
+const packageDefinition = loadSync(protoFiles, {
   keepCase: true,
   longs: String,
   enums: String,
   defaults: true,
   oneofs: true,
-  includeDirs: [GOOGLE_PROTO_PATH, SPACEMESH_PROTO_PATH],
+  includeDirs: [protoDirs.google, protoDirs.spacemesh],
 })
 
-const api = grpc.loadPackageDefinition(packageDefinition)
+const api = loadPackageDefinition(packageDefinition)
 
-export default api
+export default api as any

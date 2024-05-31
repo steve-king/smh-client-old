@@ -1,11 +1,10 @@
-import { setProperty } from '../utils'
+import { Config } from '@/types'
+import { setProperty, log } from '@/server/utils'
 
-import { getNode } from './node'
-import { getNodeStreams } from './node-streams'
-import { getService } from './service'
-import Stream from './Stream'
-import { log } from '../utils'
-import { Config } from '../../types'
+import { getNode } from '@/server/store/node'
+import { getNodeStreams } from '@/server/store/node-streams'
+import { getService } from '@/server/store/service'
+import Stream from '@/server/store/Stream'
 
 class Store {
   state: Config | null

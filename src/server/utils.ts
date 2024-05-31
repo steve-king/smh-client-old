@@ -1,8 +1,9 @@
 import fs from 'fs'
 import path from 'path'
-import { Config } from '@/types'
-import { logLevel } from './index'
 import cron from 'node-cron'
+
+import { Config } from '@/types'
+import { logLevel } from '@/server'
 
 /**
  *
@@ -101,4 +102,28 @@ export const cronTask = (
 
   log('INFO', 'cron', `task schedule: every ${interval} minutes`)
   return task
+}
+
+/**
+ * recursively get a list of all files in a directory
+ * @param dir The top level directory to search
+ * @param ext optional - filter results by file extension e.g. '.proto'
+ * @returns string array of file paths
+ */
+export const recursiveFileList = (dir: string, ext?: string) => {
+  let fileList: string[] = []
+
+  const files = fs.readdirSync(dir)
+
+  for (const file of files) {
+    const filePath = path.join(dir, file)
+    const stat = fs.statSync(filePath)
+
+    if (stat.isDirectory()) {
+      fileList = fileList.concat(recursiveFileList(filePath, ext))
+    } else if (ext === undefined || filePath.endsWith(ext)) {
+      fileList.push(filePath)
+    }
+  }
+  return fileList
 }

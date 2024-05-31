@@ -7,7 +7,7 @@ const nextApp = next({ dev })
 const nextAppHandle = nextApp.getRequestHandler()
 
 import { getConfig, log, cronTask } from '@/server/utils'
-import Socket from './socket'
+import Socket from '@/server/socket'
 import Store from '@/server/store'
 
 const config = getConfig()

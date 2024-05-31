@@ -1,7 +1,8 @@
 import SocketIO, { Socket } from 'socket.io'
 import { throttle } from 'lodash'
 import { Server } from 'http'
-import { log } from './utils'
+
+import { log } from '@/server/utils'
 
 class SocketServer {
   io: SocketIO.Server | null

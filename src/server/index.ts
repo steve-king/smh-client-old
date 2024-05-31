@@ -1,36 +1,39 @@
 import express, { Request, Response } from 'express'
+import http from 'http'
 import next from 'next'
 
 const dev = process.env.NODE_ENV !== 'production'
-const app = next({ dev })
-const handle = app.getRequestHandler()
+const nextApp = next({ dev })
+const nextAppHandle = nextApp.getRequestHandler()
 
 import { getConfig, log, cronTask } from '@/server/utils'
+import Socket from './socket'
 import Store from '@/server/store'
 
 const config = getConfig()
 const store = Store.init(config)
 
 const startServer = () => {
-  const server = express()
+  const app = express()
 
   // Custom routes
-  server.get('/api', (req: Request, res: Response) => {
+  app.get('/api', (req: Request, res: Response) => {
     log('INFO', 'http', '[GET] /api')
     res.json({ message: 'Welcome to smh-client' })
   })
 
-  server.get('/api/state', (req: Request, res: Response) => {
+  app.get('/api/state', (req: Request, res: Response) => {
     log('INFO', 'http', '[GET] /api/state')
     res.json(store.state)
   })
 
   // Default next.js handler
-  server.all('*', (req: Request, res: Response) => {
-    return handle(req, res)
+  app.all('*', (req: Request, res: Response) => {
+    return nextAppHandle(req, res)
   })
 
   const port = process.env.PORT || 3131
+  const server = http.createServer(app)
   server.listen(port, (err?: any) => {
     if (err) throw err
     // console.log(`> Ready on http://localhost:${port}`)
@@ -44,10 +47,10 @@ const startServer = () => {
   return server
 }
 
-app.prepare().then(() => {
+nextApp.prepare().then(() => {
   const server = startServer()
-  // const socket = Socket.init(server)
-  // store.onUpdate(() => socket.emit('update'))
+  const socket = Socket.init(server)
+  store.onUpdate(() => socket.emit('update'))
   store.fetch()
   cronTask(config.settings?.refreshInterval, store.fetch).start()
 })

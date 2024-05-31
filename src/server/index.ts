@@ -52,4 +52,4 @@ app.prepare().then(() => {
   store.fetch()
 })
 
-export const logLevel = 'verbose' // 'verbose'
+export const logLevel = '' // 'verbose'

@@ -1,5 +1,4 @@
 'use client'
-import { useSocket } from '@/lib/socket'
 import { useStore } from '@/lib/store'
 
 import Nodes from '@/components/nodes'
@@ -14,7 +13,6 @@ import {
 } from '@/components/ui/card'
 
 export default function Home() {
-  useSocket()
   useStore()
   return (
     <main className="container py-4">

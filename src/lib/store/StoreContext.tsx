@@ -2,6 +2,7 @@
 
 import { Config } from '@/types'
 import React, { createContext, useContext, useState, ReactNode } from 'react'
+import { useSocket } from '@/lib/socket'
 
 interface StoreContext {
   state: Config
@@ -21,6 +22,7 @@ const defaultState = {
 
 export const StoreProvider: React.FC<Props> = ({ children }) => {
   const [state, setState] = useState<Config>(defaultState)
+  useSocket()
 
   return (
     <StoreContext.Provider value={{ state, setState }}>

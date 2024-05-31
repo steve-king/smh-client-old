@@ -1,8 +1,7 @@
 'use client'
 import { useEffect } from 'react'
-
-import { useSocketContext } from '@/lib/socket'
 import { useStoreContext } from '@/lib/store'
+import { useSocketContext } from '@/lib/socket'
 
 const fetchStore = (setState: Function) => {
   fetch('/api/state')

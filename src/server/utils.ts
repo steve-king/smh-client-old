@@ -1,6 +1,7 @@
-import { Config } from '@/types'
 import fs from 'fs'
+import { Config } from '@/types'
 import { logLevel } from './index'
+import cron from 'node-cron'
 
 /**
  *
@@ -73,10 +74,29 @@ export function log(
     text += new Date().toISOString()
     text += separator
     text += title
-    text += ':'
     text += separator
     text += message
 
     console.log(text)
   }
+}
+
+export const cronTask = (
+  interval: number = 5, // 5m default
+  callback: Function
+) => {
+  const cronString = `*/${interval} * * * *`
+  const task = cron.schedule(
+    cronString,
+    () => {
+      callback()
+      log('INFO', 'cron', 'task executed')
+    },
+    {
+      scheduled: false,
+    }
+  )
+
+  log('INFO', 'cron', `task schedule: every ${interval} minutes`)
+  return task
 }

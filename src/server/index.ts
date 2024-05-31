@@ -5,7 +5,7 @@ const dev = process.env.NODE_ENV !== 'production'
 const app = next({ dev })
 const handle = app.getRequestHandler()
 
-import { getConfig, log } from '@/server/utils'
+import { getConfig, log, cronTask } from '@/server/utils'
 import Store from '@/server/store'
 
 const config = getConfig()
@@ -48,8 +48,8 @@ app.prepare().then(() => {
   const server = startServer()
   // const socket = Socket.init(server)
   // store.onUpdate(() => socket.emit('update'))
-  // cron(refreshInterval, store.fetch).start()
   store.fetch()
+  cronTask(config.settings?.refreshInterval, store.fetch).start()
 })
 
 export const logLevel = '' // 'verbose'

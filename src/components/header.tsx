@@ -27,6 +27,16 @@ const Header = () => {
             <ThemeSwitch />
           </li>
           <li className="inline-block align-middle ml-2">
+            <Link
+              href="https://github.com/steve-king/smh-client"
+              target="_blank"
+            >
+              <Button variant="ghost" size="icon">
+                <Icon.github />
+              </Button>
+            </Link>
+          </li>
+          <li className="inline-block align-middle ml-2">
             <Button variant="ghost" size="icon">
               <Icon.bolt />
             </Button>

@@ -20,9 +20,7 @@ export default function Home() {
     <main className="container py-4">
       <Card>
         <CardHeader>Nodes</CardHeader>
-        <CardContent>
-          <Nodes />
-        </CardContent>
+        <CardContent>{/* <Nodes /> */}</CardContent>
       </Card>
     </main>
   )

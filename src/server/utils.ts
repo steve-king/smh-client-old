@@ -1,5 +1,5 @@
 import { Config } from '@/types'
-import { readFileSync } from 'fs'
+import fs from 'fs'
 import { logLevel } from './index'
 
 /**
@@ -7,10 +7,18 @@ import { logLevel } from './index'
  * @returns Config
  */
 export const getConfig = (): Config => {
-  const file = `${process.cwd()}/data/config.json`
-  const fileContents = readFileSync(file, { encoding: 'utf8' })
+  const defaultFile = `${process.cwd()}/src/config.default.json`
+  let file = `${process.cwd()}/data/config.json`
+  let fileContents
+
+  if (!fs.existsSync(file)) {
+    log('INFO', 'config', 'not found, copying config.default.json')
+    fs.copyFileSync(defaultFile, file)
+  }
+
+  fileContents = fs.readFileSync(file, { encoding: 'utf8' })
   const json = JSON.parse(fileContents)
-  log('INFO', 'config', `file read from disk: ${file}`)
+  log('INFO', 'config', `read from disk: ${file}`)
   return json
 }
 

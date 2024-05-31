@@ -39,12 +39,12 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 
 SMH-Client is a self-hosted web application for monitoring the data that your Spacemesh nodes and post services expose via their gRPC APIs.
 
-- The node.js server will maintain gRPC streaming calls with all of your configured instances.
-- The server continuously collects this data and holds an up-to-date global 'state' object in memory.
-- Whenever the state is changed, an 'update' websocket event is emitted to all connected browser clients.
-- When the web browser receives the socket event, it will immediately fetch the latest state from the server, using a good old http request
-- If you have a VPN or ZTNA (Zero Trust Network Access) solution for remote access, you can easily check on your nodes from any location
-- (Work in progress) - You can also set email alerts to trigger whenever a significant event occurs (e.g when a node goes offline, or when a post service starts/finishes proving, etc)
+- A node.js server will maintain gRPC streaming calls with all of your configured instances.
+- The server continuously collects this data, holding an up-to-date global 'state' object in memory.
+- Whenever the state changes, an 'update' websocket event is emitted to all connected clients.
+- When the web browser receives the websocket event, it will immediately fetch the latest state from the server, using a good old http request.
+- If you have a VPN or ZTNA (Zero Trust Network Access) solution for remote access, you can easily check on your nodes from any location.
+- (Work in progress) - You can also set email alerts to trigger whenever a significant event occurs (e.g when a node goes offline, or when a post service starts/finishes proving)
 
 # Installation
 

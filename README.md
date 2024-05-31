@@ -37,23 +37,26 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 
 # SMH-Client
 
-A top level description of the project.
+SMH-Client is a self-hosted web application for monitoring the data that your Spacemesh nodes and post services expose via their gRPC APIs.
+
+- The node.js server will maintain gRPC streaming calls with all of your configured instances.
+- The server continuously collects this data and holds an up-to-date global 'state' object in memory.
+- Whenever the state is changed, an 'update' websocket event is emitted to all connected browser clients.
+- When the web browser receives the socket event, it will immediately fetch the latest state from the server, using a good old http request
+- If you have a VPN or ZTNA (Zero Trust Network Access) solution for remote access, you can easily check on your nodes from any location
+- (Work in progress) - You can also set email alerts to trigger whenever a significant event occurs (e.g when a node goes offline, or when a post service starts/finishes proving, etc)
 
 # Installation
 
-## With Docker (recommended)
+## via Docker (recommended)
 
 Pre-requisites:
 
 - Docker
 
-### Docker run
-
-```
-
-```
-
 ### Docker compose
+
+Preferred method.
 
 1. Create empty folders: `smh-client` and `smh-client/data`
 2. Create file `smh-client/compose.yaml` with the following contents:
@@ -63,8 +66,6 @@ services:
   smh-client:
     container_name: smh-client
     build: github.com/steve-king/smh-client.git
-    dns:
-      - 192.168.1.2
     ports:
       - '3131:3131'
     volumes:
@@ -73,6 +74,14 @@ services:
 
 3. cd to `smh-client` directory
 4. run: `docker compose up -d`
+
+### Docker run
+
+Alternatively, you can just run the following command:
+
+```
+
+```
 
 ## Manual installation
 

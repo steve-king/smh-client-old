@@ -1,7 +1,7 @@
 'use client'
 import { useEffect } from 'react'
 import io from 'socket.io-client'
-import { useSocketContext } from './SocketContext'
+import { useSocketContext } from '@/lib/socket'
 
 const useSocket = (url: string = '') => {
   const { setSocket, setIsConnected } = useSocketContext()
@@ -21,14 +21,11 @@ const useSocket = (url: string = '') => {
     })
 
     socket.on('connect_error', (err: any) => {
-      // the reason of the error, for example "xhr poll error"
-      console.log(err.message)
-
-      // some additional description, for example the status code of the initial HTTP response
-      console.log(err.description)
-
-      // some additional context, for example the XMLHttpRequest object
-      console.log(err.context)
+      console.log('Socket error')
+      console.log(err.message) // the reason of the error, for example "xhr poll error"
+      console.log(err.description) // some additional description, for example the status code of the initial HTTP response
+      console.log(err.context) // some additional context, for example the XMLHttpRequest object
+      console.log('END Socket error')
     })
 
     socket.on('disconnect', () => {

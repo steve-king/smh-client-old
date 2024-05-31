@@ -1,4 +1,5 @@
 import fs from 'fs'
+import path from 'path'
 import { Config } from '@/types'
 import { logLevel } from './index'
 import cron from 'node-cron'
@@ -8,9 +9,10 @@ import cron from 'node-cron'
  * @returns Config
  */
 export const getConfig = (): Config => {
-  const deafultConfigFile = `${process.cwd()}/src/config.default.json`
-  const dir = `${process.cwd()}/data`
-  const file = `${dir}/config.json`
+  const cwd = process.cwd()
+  const defaultFile = path.join(cwd, 'src', 'config.default.json')
+  const dir = path.join(cwd, 'data')
+  const file = path.join(dir, 'config.json')
 
   if (!fs.existsSync(dir)) {
     log('INFO', 'data', `create folder: ${dir}`)
@@ -19,7 +21,7 @@ export const getConfig = (): Config => {
 
   if (!fs.existsSync(file)) {
     log('INFO', 'data', 'configuration not found, copying config.default.json')
-    fs.copyFileSync(deafultConfigFile, file)
+    fs.copyFileSync(defaultFile, file)
   }
 
   const fileContents = fs.readFileSync(file, { encoding: 'utf8' })

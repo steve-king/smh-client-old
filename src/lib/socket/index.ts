@@ -1,4 +1,4 @@
-import { SocketProvider, useSocketContext } from './SocketContext'
 import useSocket from './useSocket'
+import { SocketProvider, useSocketContext } from './SocketContext'
 
-export { useSocket, SocketProvider, useSocketContext }
+export { useSocket, useSocketContext, SocketProvider }

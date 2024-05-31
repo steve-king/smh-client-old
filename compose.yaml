@@ -1,0 +1,15 @@
+services:
+  smh-client:
+    container_name: smh-client
+    build: .
+    # network_mode: host
+    dns:
+      - 192.168.1.2
+    ports:
+      - '3131:3131'
+    # environment:
+    #   - NODE_ENV=production
+    volumes:
+      - type: bind
+        source: ./data
+        target: /app/data

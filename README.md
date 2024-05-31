@@ -1,4 +1,4 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+<!-- This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
 
@@ -33,4 +33,57 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details. -->
+
+# SMH-Client
+
+A top level description of the project.
+
+# Installation
+
+## With Docker (recommended)
+
+Pre-requisites:
+
+- Docker
+
+### Docker run
+
+```
+
+```
+
+### Docker compose
+
+1. Create empty folders `smh-client` and `smh-client/data`
+2. Create the file `smh-client/compose.yaml` with the following contents:
+
+```
+services:
+  smh-client:
+    container_name: smh-client
+    build: https://github.com/steve-king/smh-client.git#latest
+    dns:
+      - 192.168.1.2
+    ports:
+      - '3131:3131'
+    volumes:
+      - type: bind
+        source: ./data
+        target: /app/data
+
+```
+
+3. cd to `smh-client` directory
+4. `docker compose up -d`
+
+## Manual installation
+
+Pre-requisites:
+
+- nodejs (v18 or higher)
+
+1. Clone the respository: `git clone xxx`
+2. Change directory: `cd smh-client`
+3. Install node packages: `npm install`
+4. Start the server: `npm start`

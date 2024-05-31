@@ -62,9 +62,7 @@ Pre-requisites:
 services:
   smh-client:
     container_name: smh-client
-    build: https://github.com/steve-king/smh-client.git#latest
-    dns:
-      - 192.168.1.2
+    build: https://github.com/steve-king/smh-client.git
     ports:
       - '3131:3131'
     volumes:
@@ -83,7 +81,7 @@ Pre-requisites:
 
 - nodejs (v18 or higher)
 
-1. Clone the respository: `git clone xxx`
-2. Change directory: `cd smh-client`
+1. Download zip and extract files, or clone: `git clone git@github.com:steve-king/smh-client.git`
+2. Change to directory: `cd smh-client`
 3. Install node packages: `npm install`
 4. Start the server: `npm start`

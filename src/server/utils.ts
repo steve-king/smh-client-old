@@ -7,18 +7,23 @@ import { logLevel } from './index'
  * @returns Config
  */
 export const getConfig = (): Config => {
-  const defaultFile = `${process.cwd()}/src/config.default.json`
-  let file = `${process.cwd()}/data/config.json`
-  let fileContents
+  const deafultConfigFile = `${process.cwd()}/src/config.default.json`
+  const dir = `${process.cwd()}/data`
+  const file = `${dir}/config.json`
 
-  if (!fs.existsSync(file)) {
-    log('INFO', 'config', 'not found, copying config.default.json')
-    fs.copyFileSync(defaultFile, file)
+  if (!fs.existsSync(dir)) {
+    log('INFO', 'data', `create folder: ${dir}`)
+    fs.mkdirSync(dir)
   }
 
-  fileContents = fs.readFileSync(file, { encoding: 'utf8' })
+  if (!fs.existsSync(file)) {
+    log('INFO', 'data', 'configuration not found, copying config.default.json')
+    fs.copyFileSync(deafultConfigFile, file)
+  }
+
+  const fileContents = fs.readFileSync(file, { encoding: 'utf8' })
   const json = JSON.parse(fileContents)
-  log('INFO', 'config', `read from disk: ${file}`)
+  log('INFO', 'data', `configuration read from disk: ${file}`)
   return json
 }
 
@@ -68,6 +73,7 @@ export function log(
     text += new Date().toISOString()
     text += separator
     text += title
+    text += ':'
     text += separator
     text += message
 

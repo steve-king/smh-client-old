@@ -1,3 +1,0 @@
-[submodule "src/server/spacemesh/api"]
-	path = src/server/spacemesh/api
-	url = git@github.com:spacemeshos/api.git

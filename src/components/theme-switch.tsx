@@ -29,11 +29,7 @@ export const ThemeSwitch = () => {
 
   return (
     <div>
-      <Select
-        value={theme}
-        onValueChange={(value: string) => setTheme(value)}
-        className="inline-block align-middle"
-      >
+      <Select value={theme} onValueChange={(value: string) => setTheme(value)}>
         <SelectTrigger className="w-[100px]">
           <SelectValue placeholder="Theme" />
         </SelectTrigger>

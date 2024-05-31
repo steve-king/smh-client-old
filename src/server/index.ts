@@ -36,7 +36,6 @@ const startServer = () => {
   const server = http.createServer(app)
   server.listen(port, (err?: any) => {
     if (err) throw err
-    // console.log(`> Ready on http://localhost:${port}`)
     log(
       'INFO',
       `${dev ? 'development' : process.env.NODE_ENV} server`,

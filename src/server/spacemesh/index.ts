@@ -1,7 +1,6 @@
 import path from 'path'
 import { loadPackageDefinition } from '@grpc/grpc-js'
 import { loadSync } from '@grpc/proto-loader'
-
 import { recursiveFileList } from '@/server/utils'
 
 const cwd = process.cwd()

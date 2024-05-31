@@ -1,7 +1,7 @@
 'use client'
 import { useEffect } from 'react'
 import { useStoreContext } from '@/lib/store'
-// import { useSocketContext } from '@/lib/socket'
+import { useSocketContext } from '@/lib/socket'
 
 const fetchStore = (setState: Function) => {
   fetch('/api/state')
@@ -15,17 +15,17 @@ const fetchStore = (setState: Function) => {
 
 const useStore = () => {
   const { setState } = useStoreContext()
-  // const { socket, isConnected } = useSocketContext()
+  const { socket, isConnected } = useSocketContext()
 
   useEffect(() => {
     fetchStore(setState)
   }, [setState])
 
-  // useEffect(() => {
-  //   if (isConnected) {
-  //     socket.on('update', () => fetchStore(setState))
-  //   }
-  // }, [isConnected, socket, setState])
+  useEffect(() => {
+    if (isConnected) {
+      socket.on('update', () => fetchStore(setState))
+    }
+  }, [isConnected, socket, setState])
 }
 
 export default useStore

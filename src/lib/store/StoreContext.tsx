@@ -22,7 +22,7 @@ const defaultState = {
 
 export const StoreProvider: React.FC<Props> = ({ children }) => {
   const [state, setState] = useState<Config>(defaultState)
-  // useSocket()
+  useSocket()
 
   return (
     <StoreContext.Provider value={{ state, setState }}>

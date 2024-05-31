@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import { Roboto_Mono } from 'next/font/google'
 import './globals.css'
 
-import { SocketProvider } from '@/lib/socket'
+// import { SocketProvider } from '@/lib/socket'
 import { StoreProvider } from '@/lib/store'
 import { ThemeProvider } from '@/lib/theme'
 
@@ -24,19 +24,19 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={robotoMono.className}>
-        <SocketProvider>
-          <StoreProvider>
-            <ThemeProvider
-              attribute="class"
-              defaultTheme="light"
-              enableSystem
-              disableTransitionOnChange
-            >
-              <Header />
-              {children}
-            </ThemeProvider>
-          </StoreProvider>
-        </SocketProvider>
+        {/* <SocketProvider> */}
+        <StoreProvider>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="light"
+            enableSystem
+            disableTransitionOnChange
+          >
+            <Header />
+            {children}
+          </ThemeProvider>
+        </StoreProvider>
+        {/* </SocketProvider> */}
       </body>
     </html>
   )

@@ -1,11 +1,15 @@
 import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
+import { Roboto_Mono } from 'next/font/google'
 import './globals.css'
 
 import { SocketProvider } from '@/lib/socket'
 import { StoreProvider } from '@/lib/store'
+import { ThemeProvider } from '@/lib/theme'
 
-const inter = Inter({ subsets: ['latin'] })
+import { Header } from '@/components/header'
+
+// const inter = Inter({ subsets: ['latin'] })
+const robotoMono = Roboto_Mono({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -18,12 +22,22 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <SocketProvider>
-      <StoreProvider>
-        <html lang="en">
-          <body className={inter.className}>{children}</body>
-        </html>
-      </StoreProvider>
-    </SocketProvider>
+    <html lang="en" suppressHydrationWarning>
+      <body className={robotoMono.className}>
+        <SocketProvider>
+          <StoreProvider>
+            <ThemeProvider
+              attribute="class"
+              defaultTheme="light"
+              enableSystem
+              disableTransitionOnChange
+            >
+              <Header />
+              {children}
+            </ThemeProvider>
+          </StoreProvider>
+        </SocketProvider>
+      </body>
+    </html>
   )
 }

@@ -23,7 +23,7 @@ const Node = ({
   data,
 }: NodeProps) => {
   const { status } = data
-  const isOnline = !status.error
+  const isOnline = status && !status.error
 
   let synced, peers, verified_layer, top_layer
 

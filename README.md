@@ -48,15 +48,7 @@ SMH-Client is a self-hosted web application for monitoring the data that your Sp
 
 # Installation
 
-## via Docker (recommended)
-
-Pre-requisites:
-
-- Docker
-
-### Docker compose
-
-Preferred method.
+## with Docker compose (recommended)
 
 1. Create empty folders: `smh-client` and `smh-client/data`
 2. Create file `smh-client/compose.yaml` with the following contents:
@@ -75,9 +67,16 @@ services:
 3. cd to `smh-client` directory
 4. run: `docker compose up -d`
 
-### Docker run
+### Update to latest version:
 
-Alternatively, you can just run the following command:
+```
+docker compose down
+docker compose up --build --force-recreate
+```
+
+## Docker run
+
+If you prefer not to use compose, run:
 
 ```
 

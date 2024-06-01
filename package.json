@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "ts-node-dev -r tsconfig-paths/register --clear --respawn --ignore-watch .next src/server",
     "build": "next build",
-    "start": "NODE_ENV=production ts-node src/server",
+    "start": "cross-env NODE_ENV=production ts-node src/server",
     "lint": "next lint"
   },
   "dependencies": {

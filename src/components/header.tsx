@@ -10,11 +10,11 @@ import Link from 'next/link'
 
 const Header = () => {
   return (
-    <header>
+    <header className="dark">
       <div className="flex items-center justify-between p-4">
         <h1 className="text-xl">
           <Link href="/">
-            <Avatar className="inline-block align-middle mr-2">
+            <Avatar className="inline-block align-middle mr-2 border-2 border-slate-50">
               <AvatarImage src="/icon.png" alt="Spacemesh" />
             </Avatar>
             <span className="relative" style={{ top: '1px' }}>

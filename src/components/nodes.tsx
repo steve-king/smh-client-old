@@ -10,6 +10,7 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table'
+import Icon from '@/components/ui/icons'
 import { useStoreContext } from '@/lib/store'
 import { Node as NodeProps } from '@/types'
 
@@ -43,12 +44,32 @@ const Node = ({
         </small>
       </TableCell>
       <TableCell>v1.5.6</TableCell>
-      <TableCell>{isOnline ? 'true' : 'false'}</TableCell>
-      <TableCell>{isOnline ? (synced ? 'synced' : 'syncing') : ''}</TableCell>
-      <TableCell>{isOnline ? peers : ''}</TableCell>
-      <TableCell className="text-right">
+      <TableCell className="text-center">
+        {isOnline ? (
+          <span className="text-green-500">
+            <Icon.check />
+          </span>
+        ) : (
+          <span className="text-red-500">
+            <Icon.alert />
+          </span>
+        )}
+      </TableCell>
+      <TableCell className="text-center">
+        {isOnline ? (
+          synced ? (
+            <span className="text-green-500">synced</span>
+          ) : (
+            <span className="text-yellow-500">syncing</span>
+          )
+        ) : (
+          ''
+        )}
+      </TableCell>
+      <TableCell className="text-center">
         {isOnline ? `${verified_layer} / ${top_layer}` : ''}
       </TableCell>
+      <TableCell className="text-right">{isOnline ? peers : ''}</TableCell>
     </TableRow>
   )
 }
@@ -62,10 +83,10 @@ const Nodes = () => {
           <TableHead>NAME</TableHead>
           <TableHead>HOST</TableHead>
           <TableHead>VERSION</TableHead>
-          <TableHead>ONLINE</TableHead>
-          <TableHead>STATUS</TableHead>
-          <TableHead>PEERS</TableHead>
-          <TableHead className="text-right">LAYER</TableHead>
+          <TableHead className="text-center">ONLINE</TableHead>
+          <TableHead className="text-center">STATUS</TableHead>
+          <TableHead className="text-center">LAYER</TableHead>
+          <TableHead className="text-right">PEERS</TableHead>
         </TableRow>
       </TableHeader>
       <TableBody>

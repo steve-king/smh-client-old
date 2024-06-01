@@ -29,13 +29,13 @@ export default function Home() {
   return (
     <main className="container">
       <Card className="mt-6">
-        <CardHeader>NODES</CardHeader>
+        <CardHeader className="text-center">NODES</CardHeader>
         <CardContent>
           <Nodes />
         </CardContent>
       </Card>
       <Card className="mt-6">
-        <CardHeader>SERVICES</CardHeader>
+        <CardHeader className="text-center">SERVICES</CardHeader>
         <CardContent>
           <Services />
         </CardContent>

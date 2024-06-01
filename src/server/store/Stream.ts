@@ -85,12 +85,10 @@ export default class Stream {
       this.config.onEnd()
     }
 
-    this.stream = null
-
     if (!this.cancelled) {
-      setTimeout(() => {
-        this.start()
-      }, reconnectInterval)
+      this.stream?.cancel()
+      this.stream = null
+      setTimeout(this.start, reconnectInterval)
     }
   }
 }

@@ -1,10 +1,22 @@
-import { Config } from '@/types'
+import { Config, NodeData } from '@/types'
 import { setProperty, log } from '@/server/utils'
 
 import { getNode } from '@/server/store/node'
 import { getNodeStreams } from '@/server/store/node-streams'
 import { getService } from '@/server/store/service'
 import Stream from '@/server/store/Stream'
+
+const defaultData: NodeData = {
+  status: {},
+  build: {},
+  coinbase: {},
+  nodeInfo: {},
+  postInfo: {},
+  version: {},
+  ErrorStream: [],
+  EventsStream: [],
+  PeerInfoStream: [],
+}
 
 class Store {
   state: Config | null
@@ -19,6 +31,7 @@ class Store {
   init = (config: Config) => {
     this.streams.forEach((stream) => stream.cancel())
     this.state = config
+    this.state.nodes.forEach((node) => (node.data = defaultData))
     log('INFO', 'store', 'initialised')
     return this
   }
@@ -54,7 +67,7 @@ class Store {
   updateNode = (id: string, key: string, value: any) => {
     const node = this.state?.nodes.find((item) => item.name === id)
     if (node) {
-      node.data = node.data ? node.data : {}
+      // node.data = node.data ? node.data : {}
       setProperty(node.data, key, value)
 
       if (typeof this.onUpdateCallback === 'function') {

@@ -6,9 +6,9 @@ import { useSocketContext } from '@/lib/socket'
 const fetchStore = (setState: Function) => {
   fetch('/api/state')
     .then((res) => res.json())
-    .then((data) => {
-      setState(data)
-      console.log('state', data)
+    .then((json) => {
+      setState(json)
+      console.log('state', json)
     })
     .catch((e) => console.log('Error fetching state: ', e))
 }

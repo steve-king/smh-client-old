@@ -15,7 +15,19 @@ export interface Node {
   port_private: string
   port_post: string
   smeshing: boolean | undefined
-  data?: any
+  data: NodeData
+}
+
+export interface NodeData {
+  status: any
+  build: any
+  coinbase: any
+  nodeInfo: any
+  postInfo: any
+  version: any
+  ErrorStream: any
+  EventsStream: any
+  PeerInfoStream: any
 }
 
 export interface Service {

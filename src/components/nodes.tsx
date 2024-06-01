@@ -54,6 +54,7 @@ const Node = ({
 
 const Nodes = () => {
   const { state } = useStoreContext()
+
   // const state: Config = {
   //   services: [],
   //   nodes: [

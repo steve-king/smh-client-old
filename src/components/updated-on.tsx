@@ -10,10 +10,6 @@ const UpdatedOn = () => {
   const { updatedOn } = useStoreContext()
   const [message, setMessage] = useState('')
 
-  if (!updatedOn) {
-    return null
-  }
-
   useEffect(() => {
     const interval = setInterval(() => {
       const when = formatDistanceToNowStrict(updatedOn, {
@@ -25,9 +21,13 @@ const UpdatedOn = () => {
     return () => clearInterval(interval)
   }, [updatedOn, isConnected])
 
+  if (!updatedOn) {
+    return null
+  }
+
   return (
     <p className="mt-4 text-xs text-muted-foreground text-center">
-      Server is {isConnected ? 'online' : 'offline'}. <br />
+      {isConnected ? 'Connected to server' : 'Disconnected from server'}. <br />
       Last update received: {message}
     </p>
   )

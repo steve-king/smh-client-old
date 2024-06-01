@@ -6,18 +6,6 @@ import { getNodeStreams } from '@/server/store/node-streams'
 import { getService } from '@/server/store/service'
 import Stream from '@/server/store/Stream'
 
-const defaultData: NodeData = {
-  status: {},
-  build: {},
-  coinbase: {},
-  nodeInfo: {},
-  postInfo: {},
-  version: {},
-  ErrorStream: [],
-  EventsStream: [],
-  PeerInfoStream: [],
-}
-
 class Store {
   state: Config | null
   onUpdateCallback: Function | null
@@ -31,7 +19,7 @@ class Store {
   init = (config: Config) => {
     this.streams.forEach((stream) => stream.cancel())
     this.state = config
-    this.state.nodes.forEach((node) => (node.data = { ...defaultData }))
+    this.state.nodes.forEach((node) => (node.data = {}))
     log('INFO', 'store', 'initialised')
     return this
   }

@@ -19,15 +19,15 @@ export interface Node {
 }
 
 export interface NodeData {
-  status: any
-  build: any
-  coinbase: any
-  nodeInfo: any
-  postInfo: any
-  version: any
-  ErrorStream: any
-  EventsStream: any
-  PeerInfoStream: any
+  status?: any
+  build?: any
+  coinbase?: any
+  nodeInfo?: any
+  postInfo?: any
+  version?: any
+  ErrorStream?: any
+  EventsStream?: any
+  PeerInfoStream?: any
 }
 
 export interface Service {

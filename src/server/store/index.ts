@@ -39,7 +39,6 @@ class Store {
   fetch = () => {
     this.fetchNodes()
     this.fetchServices()
-    this.fetchStreams()
   }
 
   fetchNodes = () => {

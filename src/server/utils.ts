@@ -16,18 +16,18 @@ export const getConfig = (): Config => {
   const file = path.join(dir, 'config.json')
 
   if (!fs.existsSync(dir)) {
-    log('INFO', 'data', `create folder: ${dir}`)
+    log('INFO', 'config', `create folder: ${dir}`)
     fs.mkdirSync(dir)
   }
 
   if (!fs.existsSync(file)) {
-    log('INFO', 'data', 'configuration not found, copying config.default.json')
+    log('INFO', 'config', 'not found, copying config.default.json')
     fs.copyFileSync(defaultFile, file)
   }
 
   const fileContents = fs.readFileSync(file, { encoding: 'utf8' })
   const json = JSON.parse(fileContents)
-  log('INFO', 'data', `configuration read from disk: ${file}`)
+  log('INFO', 'config', `read from disk: ${file}`)
   return json
 }
 

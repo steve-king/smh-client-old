@@ -78,7 +78,7 @@ export default class Stream {
     log(
       'INFO',
       'grpc',
-      `${this.config.target} ${this.config.method} ended. Reconnecting in ${reconnectIntervalSeconds} seconds`
+      `${this.config.target} ${this.config.method} ended.` // Reconnecting in ${reconnectIntervalSeconds} seconds`
     )
 
     if (typeof this.config.onEnd === 'function') {
@@ -86,8 +86,6 @@ export default class Stream {
     }
 
     if (!this.cancelled) {
-      this.stream?.cancel()
-      this.stream = null
       setTimeout(this.start, reconnectInterval)
     }
   }

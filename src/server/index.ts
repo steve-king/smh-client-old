@@ -51,6 +51,7 @@ nextApp.prepare().then(() => {
   const socket = Socket.init(server)
   store.onUpdate(() => socket.emit('update'))
   store.fetch()
+  store.fetchStreams()
   cronTask(config.settings?.refreshInterval, store.fetch).start()
 })
 

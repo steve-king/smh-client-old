@@ -9,8 +9,8 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table'
-import { useStoreContext } from '@/lib/store'
-import { Node as NodeProps } from '@/types'
+// import { useStoreContext } from '@/lib/store'
+import { Config, Node as NodeProps } from '@/types'
 
 const Node = ({
   name,
@@ -53,7 +53,28 @@ const Node = ({
 }
 
 const Nodes = () => {
-  const { state } = useStoreContext()
+  // const { state } = useStoreContext()
+  const state: Config = {
+    services: [],
+    nodes: [
+      {
+        name: 'test',
+        host: 'test',
+        port_public: 'test',
+        port_private: 'test',
+        port_post: 'test',
+        smeshing: false,
+        data: {
+          status: {
+            is_synced: true,
+            peers: 1,
+            verified_layer: 999,
+            top_layer: 1000,
+          },
+        },
+      },
+    ],
+  }
   return (
     <Table>
       <TableCaption>Updated a few seconds ago</TableCaption>

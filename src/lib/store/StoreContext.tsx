@@ -7,6 +7,8 @@ import { useSocket } from '@/lib/socket'
 interface StoreContext {
   state: Config
   setState: React.Dispatch<React.SetStateAction<Config>>
+  updatedOn: Date
+  setUpdatedOn: React.Dispatch<React.SetStateAction<Date>>
 }
 
 const StoreContext = createContext<StoreContext | undefined>(undefined)
@@ -22,10 +24,11 @@ const defaultState = {
 
 export const StoreProvider: React.FC<Props> = ({ children }) => {
   const [state, setState] = useState<Config>(defaultState)
+  const [updatedOn, setUpdatedOn] = useState<any>(null)
   useSocket()
 
   return (
-    <StoreContext.Provider value={{ state, setState }}>
+    <StoreContext.Provider value={{ state, setState, updatedOn, setUpdatedOn }}>
       {children}
     </StoreContext.Provider>
   )

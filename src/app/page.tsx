@@ -3,7 +3,7 @@ import { useStore } from '@/lib/store'
 
 import Nodes from '@/components/nodes'
 import Services from '@/components/services'
-
+import UpdatedOn from '@/components/updated-on'
 import {
   Card,
   CardContent,
@@ -29,9 +29,7 @@ export default function Home() {
           <Services />
         </CardContent>
       </Card>
-      <p className="mt-4 text-sm text-muted-foreground text-center">
-        Updated a few seconds ago
-      </p>
+      <UpdatedOn />
     </main>
   )
 }

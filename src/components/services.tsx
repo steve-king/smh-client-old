@@ -14,7 +14,7 @@ import { useStoreContext } from '@/lib/store'
 import { Service as ServiceProps } from '@/types'
 
 const Service = ({ name, host, port_operator, data }: ServiceProps) => {
-  const isOnline = !data.error
+  const isOnline = data && !data.error
 
   if (isOnline) {
     // synced = status.is_synced

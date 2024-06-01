@@ -27,8 +27,8 @@ const Node = ({
   if (isOnline) {
     synced = status.is_synced
     peers = status.connected_peers
-    verified_layer = status.verified_layer.number
-    top_layer = status.top_layer.number
+    verified_layer = status.verified_layer?.number
+    top_layer = status.top_layer?.number
   }
   return (
     <TableRow>

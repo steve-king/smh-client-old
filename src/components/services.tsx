@@ -14,8 +14,6 @@ import { Service as ServiceProps } from '@/types'
 const Service = ({ name, host, port_operator, data }: ServiceProps) => {
   const isOnline = !data.error
 
-  let synced, peers, verified_layer, top_layer
-
   if (isOnline) {
     // synced = status.is_synced
     // peers = status.connected_peers

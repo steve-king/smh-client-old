@@ -27,8 +27,6 @@ const Node = ({
 
   let synced, peers, verified_layer, top_layer
 
-  console.log(name, data.status)
-
   if (isOnline) {
     synced = status.is_synced
     peers = status.connected_peers

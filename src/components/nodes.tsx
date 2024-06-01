@@ -1,5 +1,7 @@
 'use client'
 
+import { useEffect } from 'react'
+
 import {
   Table,
   TableBody,
@@ -53,7 +55,6 @@ const Node = ({
 
 const Nodes = () => {
   const { state } = useStoreContext()
-
   return (
     <Table>
       <TableHeader>
@@ -68,7 +69,7 @@ const Nodes = () => {
         </TableRow>
       </TableHeader>
       <TableBody>
-        {state.nodes.map((node: NodeProps) => (
+        {state?.nodes.map((node: NodeProps) => (
           <Node key={node.name} {...node} />
         ))}
       </TableBody>

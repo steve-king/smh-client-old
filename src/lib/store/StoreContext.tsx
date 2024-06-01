@@ -5,8 +5,8 @@ import React, { createContext, useContext, useState, ReactNode } from 'react'
 import { useSocket } from '@/lib/socket'
 
 interface StoreContext {
-  state: Config
-  setState: React.Dispatch<React.SetStateAction<Config>>
+  state: Config | null
+  setState: React.Dispatch<React.SetStateAction<Config | null>>
   updatedOn: Date
   setUpdatedOn: React.Dispatch<React.SetStateAction<Date>>
 }
@@ -17,13 +17,8 @@ interface Props {
   children: ReactNode
 }
 
-const defaultState = {
-  nodes: [],
-  services: [],
-}
-
 export const StoreProvider: React.FC<Props> = ({ children }) => {
-  const [state, setState] = useState<Config>(defaultState)
+  const [state, setState] = useState<Config | null>(null)
   const [updatedOn, setUpdatedOn] = useState<any>(null)
   useSocket()
 

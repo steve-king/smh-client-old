@@ -1,5 +1,6 @@
 'use client'
-import { useStore } from '@/lib/store'
+import { useEffect } from 'react'
+import { useStore, useStoreContext } from '@/lib/store'
 
 import Nodes from '@/components/nodes'
 import Services from '@/components/services'
@@ -15,6 +16,16 @@ import {
 
 export default function Home() {
   useStore()
+  const { state } = useStoreContext()
+
+  // useEffect(() => {
+  //   console.log('State:', state)
+  // }, [state])
+
+  if (!state) {
+    return <div>Loading...</div>
+  }
+
   return (
     <main className="container">
       <Card className="mt-6">

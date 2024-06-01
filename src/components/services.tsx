@@ -1,5 +1,7 @@
 'use client'
 
+import { useEffect } from 'react'
+
 import {
   Table,
   TableBody,
@@ -36,7 +38,6 @@ const Service = ({ name, host, port_operator, data }: ServiceProps) => {
 
 const Nodes = () => {
   const { state } = useStoreContext()
-
   return (
     <Table>
       <TableHeader>
@@ -48,7 +49,7 @@ const Nodes = () => {
         </TableRow>
       </TableHeader>
       <TableBody>
-        {state.services.map((service: ServiceProps) => (
+        {state?.services.map((service: ServiceProps) => (
           <Service key={service.name} {...service} />
         ))}
       </TableBody>

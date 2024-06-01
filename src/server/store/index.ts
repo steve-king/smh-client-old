@@ -31,7 +31,7 @@ class Store {
   init = (config: Config) => {
     this.streams.forEach((stream) => stream.cancel())
     this.state = config
-    this.state.nodes.forEach((node) => (node.data = defaultData))
+    this.state.nodes.forEach((node) => (node.data = { ...defaultData }))
     log('INFO', 'store', 'initialised')
     return this
   }

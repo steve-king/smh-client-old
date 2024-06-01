@@ -17,14 +17,10 @@ const useStore = () => {
   const { setState } = useStoreContext()
   const { socket, isConnected } = useSocketContext()
 
-  useEffect(() => {
-    fetchStore(setState)
-  }, [setState])
+  useEffect(() => fetchStore(setState), [setState])
 
   useEffect(() => {
-    if (isConnected) {
-      socket.on('update', () => fetchStore(setState))
-    }
+    isConnected && socket.on('update', () => fetchStore(setState))
   }, [isConnected, socket, setState])
 }
 

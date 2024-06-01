@@ -71,7 +71,7 @@ services:
 
 ```
 docker compose down
-docker compose up --build --force-recreate
+docker compose up -d --build --force-recreate
 ```
 
 ## Docker run

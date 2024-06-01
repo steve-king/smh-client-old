@@ -34,5 +34,5 @@ export interface Service {
   name: string
   host: string
   port_operator: string
-  data?: any
+  data: any
 }

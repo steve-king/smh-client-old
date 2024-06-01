@@ -3,7 +3,6 @@
 import {
   Table,
   TableBody,
-  TableCaption,
   TableCell,
   TableHead,
   TableHeader,
@@ -42,11 +41,11 @@ const Node = ({
         </small>
       </TableCell>
       <TableCell>v1.5.6</TableCell>
-      <TableCell>{isOnline ? 'online' : 'offline'}</TableCell>
-      <TableCell>{synced ? 'true' : 'false'}</TableCell>
-      <TableCell>{isOnline ? peers : 0}</TableCell>
+      <TableCell>{isOnline ? 'true' : 'false'}</TableCell>
+      <TableCell>{isOnline ? (synced ? 'synced' : 'syncing') : ''}</TableCell>
+      <TableCell>{isOnline ? peers : ''}</TableCell>
       <TableCell className="text-right">
-        {isOnline ? `${verified_layer} / ${top_layer}` : 'N/A'}
+        {isOnline ? `${verified_layer} / ${top_layer}` : ''}
       </TableCell>
     </TableRow>
   )
@@ -55,37 +54,15 @@ const Node = ({
 const Nodes = () => {
   const { state } = useStoreContext()
 
-  // const state: Config = {
-  //   services: [],
-  //   nodes: [
-  //     {
-  //       name: 'test',
-  //       host: 'test',
-  //       port_public: 'test',
-  //       port_private: 'test',
-  //       port_post: 'test',
-  //       smeshing: false,
-  //       data: {
-  //         status: {
-  //           is_synced: true,
-  //           peers: 1,
-  //           verified_layer: 999,
-  //           top_layer: 1000,
-  //         },
-  //       },
-  //     },
-  //   ],
-  // }
   return (
     <Table>
-      <TableCaption>Updated a few seconds ago</TableCaption>
       <TableHeader>
         <TableRow>
           <TableHead>NAME</TableHead>
           <TableHead>HOST</TableHead>
           <TableHead>VERSION</TableHead>
+          <TableHead>ONLINE</TableHead>
           <TableHead>STATUS</TableHead>
-          <TableHead>SYNCED</TableHead>
           <TableHead>PEERS</TableHead>
           <TableHead className="text-right">LAYER</TableHead>
         </TableRow>

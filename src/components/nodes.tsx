@@ -71,7 +71,7 @@ const Node = ({
       <TableCell className="text-center">
         {isOnline ? (
           synced ? (
-            <span className="text-green-500">synced</span>
+            <span>synced</span>
           ) : (
             <span className="text-yellow-500">syncing</span>
           )

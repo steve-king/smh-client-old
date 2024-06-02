@@ -8,6 +8,8 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table'
+import { Progress } from '@/components/ui/progress'
+import Icon from '@/components/ui/icons'
 import StatusOnline from './status-online'
 import { useStoreContext } from '@/lib/store'
 import { Service as ServiceProps } from '@/types'
@@ -22,11 +24,8 @@ const Services = () => {
         <TableRow>
           <TableHead>NAME</TableHead>
           <TableHead>HOST</TableHead>
-          <TableHead>
-            Size Units
-            <br />
-            (TiB)
-          </TableHead>
+          <TableHead>Size</TableHead>
+          <TableHead>Size (TiB)</TableHead>
           <TableHead className="text-center">ONLINE</TableHead>
           <TableHead className="text-right">STATUS</TableHead>
         </TableRow>
@@ -43,6 +42,7 @@ const Services = () => {
 const Service = ({ name, host, port_operator, su, data }: ServiceProps) => {
   const isOnline: boolean = data && !data.error
   let status: string | ReactNode = '...'
+
   if (isOnline) {
     if (typeof data === 'string') {
       status = data
@@ -58,10 +58,8 @@ const Service = ({ name, host, port_operator, su, data }: ServiceProps) => {
         <br />
         <small>:{port_operator}</small>
       </TableCell>
-      <TableHead>
-        {su}
-        <br />({suToTiB(su)}TiB)
-      </TableHead>
+      <TableCell>{su} SU</TableCell>
+      <TableCell>{suToTiB(su)} TiB</TableCell>
       <TableCell className="text-center">
         <StatusOnline isOnline={isOnline} />
       </TableCell>
@@ -88,17 +86,45 @@ const ProvingStatus = (props: ProvingProps) => {
     const bytes = suToBytes(props.su)
     const percent = position / bytes
     const percentRounded = Math.round(percent * 100)
+
+    const Stage = () => {
+      if (position === 0) {
+        return (
+          <span className="text-sm">
+            <span className="text-yellow-500 animate-pulse-custom">
+              <span className="mr-1 relative" style={{ top: '-1px' }}>
+                <Icon.cpu />
+              </span>
+              k2PoW
+            </span>
+            <br />
+            {/* Nonces: {nonces.start}-{nonces.end} */}
+          </span>
+        )
+      }
+
+      return (
+        <span className="text-xs">
+          <span className="text-yellow-500 animate-pulse-custom">
+            <span className="mr-2 relative" style={{ top: '-1px' }}>
+              <Icon.hardDrive />
+            </span>
+            Disk read
+          </span>
+          <br />
+          <Progress value={percentRounded} className="my-1" />
+          <span className="text-xs text-muted-foreground">
+            Progress: {percentRounded}%
+          </span>
+        </span>
+      )
+    }
+
     return (
-      <span>
-        Proving
+      <span className="text-xs">
+        <span>Proving</span>
         <br />
-        Nonces: {nonces.start}-{nonces.end}
-        <br />
-        Position: {position}
-        <br />
-        Size: {TiB}TiB
-        <br />
-        Progress: {percentRounded}%
+        <Stage />
       </span>
     )
   }

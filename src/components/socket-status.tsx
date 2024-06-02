@@ -6,7 +6,7 @@ const SocketStatus = () => {
   const colourClass = isConnected ? 'bg-green-500' : 'bg-red-500'
   return (
     <div
-      className={`absolute ${colourClass}`}
+      className={`absolute ${colourClass} animate-pulse-custom`}
       style={{
         width: '10px',
         height: '10px',

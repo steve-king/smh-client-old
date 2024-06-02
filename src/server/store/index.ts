@@ -12,7 +12,11 @@ let testService = {
   port_operator: '10001',
   su: 16,
   data: {
-    Proving: { nonces: { start: 0, end: 128 }, position: 317708042240 },
+    Proving: {
+      nonces: { start: 0, end: 128 },
+      // position: 317708042240,
+      position: 0,
+    },
   },
 }
 
@@ -46,16 +50,19 @@ class Store {
   }
 
   fetchServices = () => {
-    this.state?.services.forEach((service) => {
-      return getService(service, this.updateService)
-    })
+    let services = this.state?.services
 
     if (process.env.NODE_ENV === 'development') {
-      const testData = this.state?.services.find((item) => item.name === 'test')
+      const testData = services?.find((item) => item.name === 'test')
       if (!testData) {
         this.state?.services.push(testService)
       }
+      services = this.state?.services.filter((item) => item.name !== 'test')
     }
+
+    services?.forEach((service) => {
+      return getService(service, this.updateService)
+    })
   }
 
   fetchStreams = () => {

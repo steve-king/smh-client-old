@@ -14,8 +14,8 @@ let testService = {
   data: {
     Proving: {
       nonces: { start: 0, end: 128 },
-      // position: 317708042240,
-      position: 0,
+      position: 317708042240,
+      // position: 0,
     },
   },
 }

@@ -98,7 +98,7 @@ const ProvingStatus = (props: ProvingProps) => {
     }
 
     return (
-      <span className="text-xs text-yellow-500">
+      <span className="text-xs text-yellow-500 animate-pulse">
         <span className="mr-2 relative" style={{ top: '-1px' }}>
           <Icon.hardDrive />
         </span>

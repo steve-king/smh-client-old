@@ -95,7 +95,7 @@ const ProvingStatus = (props: ProvingProps) => {
               <span className="mr-1 relative" style={{ top: '-1px' }}>
                 <Icon.cpu />
               </span>
-              k2PoW
+              K2PoW
             </span>
             <br />
             {/* Nonces: {nonces.start}-{nonces.end} */}
@@ -109,7 +109,7 @@ const ProvingStatus = (props: ProvingProps) => {
             <span className="mr-2 relative" style={{ top: '-1px' }}>
               <Icon.hardDrive />
             </span>
-            Disk read
+            Reading PoST data
           </span>
           <br />
           <Progress value={percentRounded} className="my-1" />

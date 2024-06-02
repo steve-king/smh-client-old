@@ -56,10 +56,7 @@ const getStatusHTTP = (target: string, request: any, callback: Function) => {
     .then((result) => {
       log('INFO', 'post.v1', httpTarget)
       console.log(result)
-      // callback(result)
-      callback({
-        Proving: { nonces: { start: 0, end: 128 }, position: 317708042240 },
-      })
+      callback(result)
     })
     .catch((error) => {
       log('INFO', 'post.v1', httpTarget)

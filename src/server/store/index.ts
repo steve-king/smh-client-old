@@ -6,6 +6,16 @@ import { getNodeStreams } from '@/server/store/node-streams'
 import { getService } from '@/server/store/service'
 import Stream from '@/server/store/Stream'
 
+let testService = {
+  name: 'test',
+  host: '192.168.1.10',
+  port_operator: '10001',
+  su: 16,
+  data: {
+    Proving: { nonces: { start: 0, end: 128 }, position: 317708042240 },
+  },
+}
+
 class Store {
   state: Config | null
   onUpdateCallback: Function | null
@@ -36,9 +46,13 @@ class Store {
   }
 
   fetchServices = () => {
-    this.state?.services.forEach((service) =>
-      getService(service, this.updateService)
-    )
+    this.state?.services.forEach((service) => {
+      return getService(service, this.updateService)
+    })
+
+    if (process.env.NODE_ENV === 'development') {
+      this.state?.services.push(testService)
+    }
   }
 
   fetchStreams = () => {

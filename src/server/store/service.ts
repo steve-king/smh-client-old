@@ -1,5 +1,6 @@
 import { credentials } from '@grpc/grpc-js'
 import api from '@/server/spacemesh'
+import { log } from '@/server/utils'
 import { Service } from '@/types'
 
 const creds = credentials.createInsecure()
@@ -8,13 +9,19 @@ export const getService = (service: Service, updateService: Function) => {
   const target = service.host + ':' + service.port_operator
   const request = {}
 
-  // getStatusHTTP(target, {}, (result: any) => {
-  //   updateService(service.name, 'data', result)
-  // })
+  let useHttp = true
 
-  getStatusGRPC(target, {}, (result: any) => {
-    updateService(service.name, 'data', result)
-  })
+  if (useHttp) {
+    log('INFO', 'post.v1', 'Using http operator service')
+    getStatusHTTP(target, {}, (result: any) => {
+      updateService(service.name, 'data', result)
+    })
+  } else {
+    log('INFO', 'post.v1', 'Using gRPC operator service')
+    getStatusGRPC(target, {}, (result: any) => {
+      updateService(service.name, 'data', result)
+    })
+  }
 }
 
 /**
@@ -28,6 +35,8 @@ const getStatusGRPC = (target: string, request: any, callback: Function) => {
       if (error) {
         result = { error: true, ...error }
       }
+      log('INFO', 'post.v1', target)
+      console.log(result)
       callback(result)
     }
   )
@@ -45,9 +54,13 @@ const getStatusHTTP = (target: string, request: any, callback: Function) => {
   fetch(httpTarget)
     .then((res) => res.json())
     .then((result) => {
+      log('INFO', 'post.v1', httpTarget)
+      console.log(result)
       callback(result)
     })
     .catch((error) => {
+      log('INFO', 'post.v1', httpTarget)
+      console.log(error)
       callback({ error: true, ...error.cause })
     })
 }

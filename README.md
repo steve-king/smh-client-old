@@ -57,11 +57,12 @@ SMH-Client is a self-hosted web application for monitoring the data that your Sp
 services:
   smh-client:
     container_name: smh-client
-    build: github.com/steve-king/smh-client.git
+    build: https://github.com/steve-king/smh-client.git#main
     ports:
       - '3131:3131'
     volumes:
       - ./data:/app/data
+    restart: always
 ```
 
 3. cd to `smh-client` directory

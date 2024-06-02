@@ -1,6 +1,6 @@
 {
   "settings": {
-    "refreshInterval": 5
+    "refreshInterval": 1
   },
   "nodes": [
     {
@@ -24,22 +24,26 @@
     {
       "name": "service-01",
       "host": "192.168.1.10",
-      "port_operator": "10001"
+      "port_operator": "10001",
+      "su": 48
     },
     {
       "name": "service-02",
       "host": "192.168.1.10",
-      "port_operator": "10002"
+      "port_operator": "10002",
+      "su": 16
     },
     {
       "name": "service-03",
       "host": "192.168.1.10",
-      "port_operator": "10003"
+      "port_operator": "10003",
+      "su": 48
     },
     {
       "name": "service-04",
       "host": "192.168.1.10",
-      "port_operator": "10004"
+      "port_operator": "10004",
+      "su": 8
     }
   ]
 }

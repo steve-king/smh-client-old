@@ -18,11 +18,13 @@ export const getConfig = (): Config => {
   if (!fs.existsSync(dir)) {
     log('INFO', 'config', `create folder: ${dir}`)
     fs.mkdirSync(dir)
+    fs.chmodSync(dir, '0777')
   }
 
   if (!fs.existsSync(file)) {
     log('INFO', 'config', 'not found, copying config.default.json')
     fs.copyFileSync(defaultFile, file)
+    fs.chmodSync(file, '0777')
   }
 
   const fileContents = fs.readFileSync(file, { encoding: 'utf8' })

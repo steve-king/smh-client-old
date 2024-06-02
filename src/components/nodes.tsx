@@ -1,7 +1,4 @@
 'use client'
-
-import { useEffect } from 'react'
-
 import {
   Table,
   TableBody,
@@ -10,9 +7,33 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table'
-import Icon from '@/components/ui/icons'
+import StatusOnline from './status-online'
 import { useStoreContext } from '@/lib/store'
 import { Node as NodeProps } from '@/types'
+
+const Nodes = () => {
+  const { state } = useStoreContext()
+  return (
+    <Table>
+      <TableHeader>
+        <TableRow>
+          <TableHead>NAME</TableHead>
+          <TableHead>HOST</TableHead>
+          <TableHead>VERSION</TableHead>
+          <TableHead className="text-center">ONLINE</TableHead>
+          <TableHead className="text-center">STATUS</TableHead>
+          <TableHead className="text-center">LAYER</TableHead>
+          <TableHead className="text-right">PEERS</TableHead>
+        </TableRow>
+      </TableHeader>
+      <TableBody>
+        {state?.nodes.map((node: NodeProps) => (
+          <Node key={node.name} {...node} />
+        ))}
+      </TableBody>
+    </Table>
+  )
+}
 
 const Node = ({
   name,
@@ -45,15 +66,7 @@ const Node = ({
       </TableCell>
       <TableCell>v1.5.6</TableCell>
       <TableCell className="text-center">
-        {isOnline ? (
-          <span className="text-green-500">
-            <Icon.check />
-          </span>
-        ) : (
-          <span className="text-red-500">
-            <Icon.alert />
-          </span>
-        )}
+        <StatusOnline isOnline={isOnline} />
       </TableCell>
       <TableCell className="text-center">
         {isOnline ? (
@@ -71,30 +84,6 @@ const Node = ({
       </TableCell>
       <TableCell className="text-right">{isOnline ? peers : ''}</TableCell>
     </TableRow>
-  )
-}
-
-const Nodes = () => {
-  const { state } = useStoreContext()
-  return (
-    <Table>
-      <TableHeader>
-        <TableRow>
-          <TableHead>NAME</TableHead>
-          <TableHead>HOST</TableHead>
-          <TableHead>VERSION</TableHead>
-          <TableHead className="text-center">ONLINE</TableHead>
-          <TableHead className="text-center">STATUS</TableHead>
-          <TableHead className="text-center">LAYER</TableHead>
-          <TableHead className="text-right">PEERS</TableHead>
-        </TableRow>
-      </TableHeader>
-      <TableBody>
-        {state?.nodes.map((node: NodeProps) => (
-          <Node key={node.name} {...node} />
-        ))}
-      </TableBody>
-    </Table>
   )
 }
 

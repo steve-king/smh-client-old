@@ -24,15 +24,16 @@ export interface NodeData {
   coinbase?: any
   nodeInfo?: any
   postInfo?: any
-  version?: any
-  ErrorStream?: any
-  EventsStream?: any
-  PeerInfoStream?: any
+  version?: string
+  ErrorStream?: any[]
+  EventsStream?: any[]
+  PeerInfoStream?: any[]
 }
 
 export interface Service {
   name: string
   host: string
   port_operator: string
-  data: any
+  su: number
+  data: string | any
 }

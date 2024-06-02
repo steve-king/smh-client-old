@@ -60,7 +60,7 @@ const getStatusHTTP = (target: string, request: any, callback: Function) => {
     })
     .catch((error) => {
       log('INFO', 'post.v1', httpTarget)
-      console.log(error)
+      console.log('offline')
       callback({ error: true, ...error.cause })
     })
 }

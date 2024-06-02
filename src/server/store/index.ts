@@ -51,7 +51,10 @@ class Store {
     })
 
     if (process.env.NODE_ENV === 'development') {
-      this.state?.services.push(testService)
+      const testData = this.state?.services.find((item) => item.name === 'test')
+      if (!testData) {
+        this.state?.services.push(testService)
+      }
     }
   }
 

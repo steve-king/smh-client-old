@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { formatDistanceToNow, formatDistanceToNowStrict } from 'date-fns'
 import { useStoreContext } from '@/lib/store'
 import { useSocketContext } from '@/lib/socket'
+import Loader from '@/components/ui/loader'
 
 const seconds = 1 // update the UI every n seconds
 
@@ -26,10 +27,18 @@ const UpdatedOn = () => {
   }
 
   return (
-    <p className="mt-4 text-xs text-muted-foreground text-center">
-      {isConnected ? 'Connected to server' : 'Disconnected from server'}. <br />
+    <div className="mt-4 text-xs text-muted-foreground text-center">
+      {isConnected ? (
+        <span>
+          Connected to server
+          <Loader />
+        </span>
+      ) : (
+        'Disconnected from server.'
+      )}
+      <br />
       Last update received: {message}
-    </p>
+    </div>
   )
 }
 

@@ -27,7 +27,7 @@ const Services = () => {
           <TableHead>Size</TableHead>
           <TableHead>Size (TiB)</TableHead>
           <TableHead className="text-center">ONLINE</TableHead>
-          <TableHead className="text-right">STATUS</TableHead>
+          <TableHead className="text-right max-w-48">STATUS</TableHead>
         </TableRow>
       </TableHeader>
       <TableBody>
@@ -63,7 +63,7 @@ const Service = ({ name, host, port_operator, su, data }: ServiceProps) => {
       <TableCell className="text-center">
         <StatusOnline isOnline={isOnline} />
       </TableCell>
-      <TableCell className="text-right">{status}</TableCell>
+      <TableCell className="text-right w-[174px]">{status}</TableCell>
     </TableRow>
   )
 }
@@ -82,49 +82,29 @@ interface ProvingProps {
 const ProvingStatus = (props: ProvingProps) => {
   if (props.Proving) {
     const { nonces, position } = props.Proving
-    const TiB = suToTiB(props.su)
     const bytes = suToBytes(props.su)
     const percent = position / bytes
     const percentRounded = Math.round(percent * 100)
 
-    const Stage = () => {
-      if (position === 0) {
-        return (
-          <span className="text-sm">
-            <span className="text-yellow-500 animate-pulse-custom">
-              <span className="mr-1 relative" style={{ top: '-1px' }}>
-                <Icon.cpu />
-              </span>
-              K2PoW
-            </span>
-            <br />
-            {/* Nonces: {nonces.start}-{nonces.end} */}
-          </span>
-        )
-      }
-
+    if (position === 0) {
       return (
-        <span className="text-xs">
-          <span className="text-yellow-500 animate-pulse-custom">
-            <span className="mr-2 relative" style={{ top: '-1px' }}>
-              <Icon.hardDrive />
-            </span>
-            Reading PoST data
+        <span className="text-sm text-yellow-500 animate-pulse">
+          <span className="mr-1 relative" style={{ top: '-1px' }}>
+            <Icon.cpu />
           </span>
-          <br />
-          <Progress value={percentRounded} className="my-1" />
-          <span className="text-xs text-muted-foreground">
-            Progress: {percentRounded}%
-          </span>
+          K2PoW
         </span>
       )
     }
 
     return (
-      <span className="text-xs">
-        <span>Proving</span>
+      <span className="text-xs text-yellow-500">
+        <span className="mr-2 relative" style={{ top: '-1px' }}>
+          <Icon.hardDrive />
+        </span>
+        Reading PoST ({percentRounded}%)
         <br />
-        <Stage />
+        <Progress value={percentRounded} className="mt-2" />
       </span>
     )
   }
